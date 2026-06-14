@@ -71,8 +71,8 @@ export async function POST(request: Request) {
       include: { user: true }
     });
 
-    // We'll wrap the entire import in a single transaction
-    const resultReport = await prisma.$transaction(async (tx) => {
+    // Process import sequentially (no single transaction to avoid TiDB 5s timeout)
+    const resultReport = await (async () => {
       // A. Create/Update members & timelines
       for (const name of Object.keys(memberPeriods)) {
         const period = memberPeriods[name];
