@@ -347,7 +347,7 @@ export async function POST(request: Request) {
         // 5. Handle regular Expense and Split calculations
         // Resolve participants
         const rawSplitWith = rowToImport.split_with || "";
-        const rawParticipantsNames = rawSplitWith.split(";").map(p => cleanName(p)).filter(p => p !== "");
+        const rawParticipantsNames = rawSplitWith.split(";").map((p: string) => cleanName(p)).filter((p: string) => p !== "");
 
         const participantInfos: Array<{ id: string; name: string }> = [];
         rawParticipantsNames.forEach(rawName => {
