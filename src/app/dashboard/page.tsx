@@ -366,7 +366,7 @@ export default function Dashboard() {
                 <BarChart data={spendingByMemberData} margin={{ left: 10 }}>
                   <XAxis dataKey="name" stroke="#94A3B8" fontSize={12} tickLine={false} />
                   <YAxis stroke="#94A3B8" fontSize={12} tickLine={false} />
-                  <Tooltip formatter={(value) => [`₹${value.toLocaleString()}`, "Paid"]} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
+                  <Tooltip formatter={(value: any) => [`₹${value?.toLocaleString()}`, "Paid"]} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
                   <Bar dataKey="value" fill="#3B82F6" radius={[8, 8, 0, 0]}>
                     {spendingByMemberData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -404,7 +404,7 @@ export default function Dashboard() {
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
-                      <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
+                      <Tooltip formatter={(value: any) => `₹${value?.toLocaleString()}`} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
@@ -441,7 +441,7 @@ export default function Dashboard() {
                   <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
                   <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} tickLine={false} />
                   <YAxis stroke="#94A3B8" fontSize={12} tickLine={false} />
-                  <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
+                  <Tooltip formatter={(value: any) => `₹${value?.toLocaleString()}`} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
                   <Line
                     type="monotone"
                     dataKey="amount"
@@ -476,13 +476,13 @@ export default function Dashboard() {
                         cx="50%"
                         cy="50%"
                         outerRadius={90}
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        label={({ name, percent }: any) => `${name} ${((percent || 0) * 100).toFixed(0)}%`}
                         dataKey="value"
                       >
                         <Cell fill="#10B981" />
                         <Cell fill="#F59E0B" />
                       </Pie>
-                      <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
+                      <Tooltip formatter={(value: any) => `₹${value?.toLocaleString()}`} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
