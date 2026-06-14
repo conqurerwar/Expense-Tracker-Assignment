@@ -179,7 +179,7 @@ export default function GroupManagement() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center space-x-2">
+          <h1 className="text-2xl font-bold tracking-tight text-white flex items-center space-x-2">
             <span>Group Members & Timeline</span>
             <Sparkles className="h-5 w-5 text-indigo-500" />
           </h1>
@@ -200,9 +200,9 @@ export default function GroupManagement() {
       {isAdding && (
         <form
           onSubmit={handleAddMember}
-          className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4 max-w-xl"
+          className="bg-slate-900 border border-slate-700 p-6 rounded-2xl shadow-sm space-y-4 max-w-xl"
         >
-          <h3 className="font-bold text-slate-800 text-sm flex items-center space-x-2">
+          <h3 className="font-bold text-slate-100 text-sm flex items-center space-x-2">
             <User className="h-4.5 w-4.5 text-blue-600" />
             <span>Add New Member Details</span>
           </h3>
@@ -216,7 +216,7 @@ export default function GroupManagement() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Sam"
-                className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl font-medium outline-none focus:border-blue-500"
+                className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl font-medium text-slate-200 outline-none focus:border-blue-500"
               />
             </div>
             <div>
@@ -227,7 +227,7 @@ export default function GroupManagement() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="e.g. sam@example.com"
-                className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl font-medium outline-none focus:border-blue-500"
+                className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl font-medium text-slate-200 outline-none focus:border-blue-500"
               />
             </div>
             <div>
@@ -237,7 +237,7 @@ export default function GroupManagement() {
                 required
                 value={joinedAt}
                 onChange={(e) => setJoinedAt(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl font-medium outline-none focus:border-blue-500"
+                className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl font-medium text-slate-200 outline-none focus:border-blue-500"
               />
             </div>
             <div>
@@ -246,7 +246,7 @@ export default function GroupManagement() {
                 type="date"
                 value={leftAt}
                 onChange={(e) => setLeftAt(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl font-medium outline-none focus:border-blue-500"
+                className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl font-medium text-slate-200 outline-none focus:border-blue-500"
               />
             </div>
           </div>
@@ -265,8 +265,8 @@ export default function GroupManagement() {
       )}
 
       {/* Visual Timeline representation */}
-      <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4">
-        <h3 className="font-bold text-slate-800 text-sm flex items-center space-x-2">
+      <div className="bg-slate-900 border border-slate-700 p-6 rounded-2xl shadow-sm space-y-4">
+        <h3 className="font-bold text-slate-100 text-sm flex items-center space-x-2">
           <Clock className="h-4.5 w-4.5 text-blue-600" />
           <span>Membership Durations (2026 Calendar)</span>
         </h3>
@@ -291,8 +291,8 @@ export default function GroupManagement() {
 
             return (
               <div key={m.id} className="flex items-center space-x-4 text-xs">
-                <span className="w-20 font-semibold text-slate-700 truncate">{m.user.name}</span>
-                <div className="flex-1 bg-slate-100 h-6 rounded-lg relative overflow-hidden">
+                <span className="w-20 font-semibold text-slate-200 truncate">{m.user.name}</span>
+                <div className="flex-1 bg-slate-800 h-6 rounded-lg relative overflow-hidden">
                   <div
                     className="absolute h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg shadow-sm border-l border-r border-blue-400"
                     style={{ left: `${startPct}%`, width: `${durationPct}%` }}
@@ -313,14 +313,14 @@ export default function GroupManagement() {
       </div>
 
       {/* Members Table */}
-      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-        <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
-          <h3 className="font-bold text-slate-800 text-sm">Membership Log</h3>
+      <div className="bg-slate-900 border border-slate-700 rounded-2xl shadow-sm overflow-hidden">
+        <div className="px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+          <h3 className="font-bold text-slate-100 text-sm">Membership Log</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="bg-slate-50/50 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-200">
+              <tr className="bg-slate-800/50 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-700">
                 <th className="py-3.5 px-6">Name</th>
                 <th className="py-3.5 px-6">Email</th>
                 <th className="py-3.5 px-6">Joined Date</th>
@@ -328,32 +328,32 @@ export default function GroupManagement() {
                 <th className="py-3.5 px-6 w-32 text-center">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-800">
               {members.map((m) => {
                 const isEditing = editingId === m.id;
                 return (
-                  <tr key={m.id} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="py-4 px-6 font-bold text-slate-800">{m.user.name}</td>
+                  <tr key={m.id} className="hover:bg-slate-800/50 transition-colors">
+                    <td className="py-4 px-6 font-bold text-slate-100">{m.user.name}</td>
                     <td className="py-4 px-6 text-slate-500">{m.user.email}</td>
-                    <td className="py-4 px-6 font-medium text-slate-600">
+                    <td className="py-4 px-6 font-medium text-slate-300">
                       {isEditing ? (
                         <input
                           type="date"
                           value={editJoinedAt}
                           onChange={(e) => setEditJoinedAt(e.target.value)}
-                          className="bg-white border border-slate-200 p-1.5 rounded-lg outline-none focus:border-blue-500 font-medium text-slate-700"
+                          className="bg-slate-900 border border-slate-700 p-1.5 rounded-lg outline-none focus:border-blue-500 font-medium text-slate-200"
                         />
                       ) : (
                         formatDate(m.joinedAt)
                       )}
                     </td>
-                    <td className="py-4 px-6 font-medium text-slate-600">
+                    <td className="py-4 px-6 font-medium text-slate-300">
                       {isEditing ? (
                         <input
                           type="date"
                           value={editLeftAt}
                           onChange={(e) => setEditLeftAt(e.target.value)}
-                          className="bg-white border border-slate-200 p-1.5 rounded-lg outline-none focus:border-blue-500 font-medium text-slate-700"
+                          className="bg-slate-900 border border-slate-700 p-1.5 rounded-lg outline-none focus:border-blue-500 font-medium text-slate-200"
                           placeholder="Active"
                         />
                       ) : (
@@ -382,14 +382,14 @@ export default function GroupManagement() {
                         <>
                           <button
                             onClick={() => handleStartEdit(m)}
-                            className="p-1.5 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
+                            className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-slate-300 transition-colors"
                             title="Edit Active Interval"
                           >
                             <Edit2 className="h-4 w-4" />
                           </button>
                           <button
                             onClick={() => handleRemoveMember(m.id)}
-                            className="p-1.5 hover:bg-slate-100 rounded-lg text-rose-500 hover:text-rose-600 transition-colors"
+                            className="p-1.5 hover:bg-slate-800 rounded-lg text-rose-500 hover:text-rose-600 transition-colors"
                             title="Remove Member"
                           >
                             <Trash2 className="h-4 w-4" />

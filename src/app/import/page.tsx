@@ -323,14 +323,14 @@ export default function ImportWizard() {
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
       {/* Wizard Step Progress */}
-      <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+      <div className="bg-slate-900 border border-slate-700 p-6 rounded-2xl shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="bg-blue-500/10 p-2.5 rounded-xl text-blue-600">
               <FileSpreadsheet className="h-5 w-5" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-slate-800 tracking-tight">CSV Import System</h1>
+              <h1 className="text-lg font-bold text-slate-100 tracking-tight">CSV Import System</h1>
               <p className="text-slate-500 text-xs">Upload, audit anomalies, and import expense logs.</p>
             </div>
           </div>
@@ -345,7 +345,7 @@ export default function ImportWizard() {
                       ? "bg-blue-600 text-white shadow-md shadow-blue-600/20 scale-105"
                       : step > num
                       ? "bg-emerald-100 text-emerald-700 border border-emerald-200"
-                      : "bg-slate-100 text-slate-400"
+                      : "bg-slate-800 text-slate-400"
                   }`}
                 >
                   {step > num ? <Check className="h-3.5 w-3.5" /> : num}
@@ -353,7 +353,7 @@ export default function ImportWizard() {
                 {num < 4 && (
                   <div
                     className={`w-8 h-[2px] mx-1 transition-all duration-300 ${
-                      step > num ? "bg-emerald-300" : "bg-slate-200"
+                      step > num ? "bg-emerald-300" : "bg-slate-700"
                     }`}
                   />
                 )}
@@ -372,7 +372,7 @@ export default function ImportWizard() {
               <UploadCloud className="h-8 w-8" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-800 dark:text-slate-100 text-base">Upload Expenses CSV</h3>
+              <h3 className="font-bold text-slate-100 text-base">Upload Expenses CSV</h3>
               <p className="text-slate-400 text-xs mt-1">Accepts tabular columns: date, amount, payer, split_type...</p>
             </div>
             <label className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-md shadow-blue-600/15 cursor-pointer active:scale-95 transition-all">
@@ -388,16 +388,16 @@ export default function ImportWizard() {
                 <Sparkles className="h-6 w-6" />
               </div>
               <div>
-                <h3 className="font-bold text-slate-800 dark:text-slate-100 text-base">Pre-load Local CSV</h3>
+                <h3 className="font-bold text-slate-100 text-base">Pre-load Local CSV</h3>
                 <p className="text-slate-500 text-xs mt-1.5 leading-relaxed">
-                  The project folder contains the default <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-[10px]">Data/expenses export.csv</code>. Click below to load, analyze all anomalies instantly, and proceed with review.
+                  The project folder contains the default <code className="bg-slate-800 px-1 py-0.5 rounded text-[10px]">Data/expenses export.csv</code>. Click below to load, analyze all anomalies instantly, and proceed with review.
                 </p>
               </div>
             </div>
             <button
               onClick={handleLoadDefault}
               disabled={loading}
-              className="w-full flex items-center justify-center space-x-2 py-3 border border-indigo-200 dark:border-indigo-800 bg-indigo-50/40 dark:bg-indigo-950/30 hover:bg-indigo-50 text-indigo-700 dark:text-indigo-300 rounded-xl text-xs font-bold transition-all active:scale-[0.98] cursor-pointer"
+              className="w-full flex items-center justify-center space-x-2 py-3 border border-indigo-800 bg-indigo-950/30 hover:bg-indigo-950/50 text-indigo-300 rounded-xl text-xs font-bold transition-all active:scale-[0.98] cursor-pointer"
             >
               {loading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -417,17 +417,17 @@ export default function ImportWizard() {
         <div className="space-y-8">
           {/* Member Configuration Timelines Card */}
           <div className="glass-card p-6 rounded-2xl shadow-sm space-y-4">
-            <div className="flex items-center space-x-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+            <div className="flex items-center space-x-2 border-b border-slate-800 pb-3">
               <Calendar className="h-4.5 w-4.5 text-blue-600" />
-              <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm">Configure Membership Timelines</h3>
+              <h3 className="font-bold text-slate-100 text-sm">Configure Membership Timelines</h3>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
               Verify the active dates for group members. Expenses only split among members active on the expense date.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-2">
               {Object.keys(memberPeriods).map((member) => (
-                <div key={member} className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 p-3.5 rounded-xl space-y-2">
-                  <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200">{member}</span>
+                <div key={member} className="bg-slate-800/50 border border-slate-700 p-3.5 rounded-xl space-y-2">
+                  <span className="text-xs font-extrabold text-slate-200">{member}</span>
                   <div className="grid grid-cols-2 gap-2 text-[10px]">
                     <div>
                       <label className="text-slate-400 block font-semibold mb-1">Joined Date</label>
@@ -435,7 +435,7 @@ export default function ImportWizard() {
                         type="date"
                         value={memberPeriods[member].joinedAt}
                         onChange={(e) => handlePeriodChange(member, "joinedAt", e.target.value)}
-                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-1 rounded font-medium text-slate-700 dark:text-slate-300"
+                        className="w-full bg-slate-900 border border-slate-700 p-1 rounded font-medium text-slate-300"
                       />
                     </div>
                     <div>
@@ -444,7 +444,7 @@ export default function ImportWizard() {
                         type="date"
                         value={memberPeriods[member].leftAt || ""}
                         onChange={(e) => handlePeriodChange(member, "leftAt", e.target.value)}
-                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-1 rounded font-medium text-slate-700 dark:text-slate-300"
+                        className="w-full bg-slate-900 border border-slate-700 p-1 rounded font-medium text-slate-300"
                         placeholder="Active"
                       />
                     </div>
@@ -456,8 +456,8 @@ export default function ImportWizard() {
 
           {/* Anomaly list */}
           <div className="glass-card rounded-2xl shadow-sm overflow-hidden">
-            <div className="px-6 py-4 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-              <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm">
+            <div className="px-6 py-4 bg-slate-900/50 border-b border-slate-800 flex items-center justify-between">
+              <h3 className="font-bold text-slate-100 text-sm">
                 Anomaly Audit Table ({issues.length} Issues Found)
               </h3>
               <span className="text-xs text-slate-500">{rawRows.length} Total CSV Rows Analyzed</span>
@@ -467,7 +467,7 @@ export default function ImportWizard() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 dark:bg-slate-900 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">
+                  <tr className="bg-slate-900 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-800">
                     <th className="py-3 px-6 w-16 text-center">Row</th>
                     <th className="py-3 px-6 w-44">Issue Type</th>
                     <th className="py-3 px-6 w-20 text-center">Confidence</th>
@@ -476,7 +476,7 @@ export default function ImportWizard() {
                     <th className="py-3 px-6 w-24 text-center">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+                <tbody className="divide-y divide-slate-800">
                   {issues.map((issue) => {
                     const idx = issue.rowIndex;
                     const isExpanded = !!expandedRows[idx];
@@ -486,16 +486,16 @@ export default function ImportWizard() {
                     const confPct = Math.round(issue.confidence * 100);
                     const confColor =
                       confPct >= 95
-                        ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-600 border border-emerald-200/50"
+                        ? "bg-emerald-950 text-emerald-600 border border-emerald-200/50"
                         : confPct >= 85
-                        ? "bg-indigo-50 dark:bg-indigo-950 text-indigo-600 border border-indigo-200/50"
-                        : "bg-amber-50 dark:bg-amber-950 text-amber-600 border border-amber-200/50";
+                        ? "bg-indigo-950 text-indigo-600 border border-indigo-200/50"
+                        : "bg-amber-950 text-amber-600 border border-amber-200/50";
 
                     return (
                       <React.Fragment key={idx + "-" + issue.issueType}>
-                        <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-colors text-xs align-top">
+                        <tr className="hover:bg-slate-800/20 transition-colors text-xs align-top">
                           <td className="py-4 px-6 text-center font-bold text-slate-400">{idx}</td>
-                          <td className="py-4 px-6 font-bold text-slate-800 dark:text-slate-200">
+                          <td className="py-4 px-6 font-bold text-slate-200">
                             <span className="flex items-center space-x-1.5">
                               <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0" />
                               <span>{issue.issueType}</span>
@@ -507,14 +507,14 @@ export default function ImportWizard() {
                             </span>
                           </td>
                           <td className="py-4 px-6 space-y-2">
-                            <p className="text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
+                            <p className="text-slate-300 font-medium leading-relaxed">
                               {issue.description}
                             </p>
-                            <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 p-2.5 rounded-lg space-y-1">
+                            <div className="bg-slate-900 border border-slate-700/60 p-2.5 rounded-lg space-y-1">
                               <span className="text-[10px] font-bold text-slate-400 uppercase block tracking-wider">
                                 Recommended Fix
                               </span>
-                              <p className="text-slate-500 dark:text-slate-400 leading-normal text-[11px]">
+                              <p className="text-slate-400 leading-normal text-[11px]">
                                 {issue.recommendedAction}
                               </p>
                             </div>
@@ -523,7 +523,7 @@ export default function ImportWizard() {
                             <select
                               value={decision}
                               onChange={(e) => handleDecisionChange(idx, e.target.value as any, issue)}
-                              className="w-full text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-2 rounded-xl text-slate-700 dark:text-slate-200 outline-none focus:border-blue-500 font-semibold"
+                              className="w-full text-xs bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none focus:border-blue-500 font-semibold"
                             >
                               <option value="APPLY_FIX">Apply Recommended Fix</option>
                               <option value="IMPORT_AS_IS">Import As Is</option>
@@ -534,14 +534,14 @@ export default function ImportWizard() {
                           <td className="py-4 px-6 text-center space-x-1">
                             <button
                               onClick={() => toggleRow(idx)}
-                              className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
+                              className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-slate-300 transition-colors"
                               title="Toggle Original CSV Data"
                             >
                               {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                             </button>
                             <button
                               onClick={() => openEditor(idx, decisions[idx.toString()]?.resolvedValue || issue.affectedRowData)}
-                              className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-blue-500 hover:text-blue-600 transition-colors"
+                              className="p-1.5 hover:bg-slate-800 rounded-lg text-blue-500 hover:text-blue-600 transition-colors"
                               title="Edit Row Details"
                             >
                               <Edit2 className="h-4 w-4" />
@@ -552,13 +552,13 @@ export default function ImportWizard() {
                         {/* Expanded details containing original CSV and resolved details */}
                         {isExpanded && (
                           <tr>
-                            <td colSpan={6} className="bg-slate-50 dark:bg-slate-900/50 p-6 border-t border-b border-slate-200 dark:border-slate-800/60 text-xs">
+                            <td colSpan={6} className="bg-slate-900/50 p-6 border-t border-b border-slate-800/60 text-xs">
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2.5">
                                   <h4 className="font-bold text-slate-400 uppercase tracking-wider text-[10px]">
                                     Original CSV Row Data
                                   </h4>
-                                  <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-4 rounded-xl space-y-1.5 font-mono text-[11px] text-slate-600 dark:text-slate-400">
+                                  <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-1.5 font-mono text-[11px] text-slate-400">
                                     <div><strong className="text-slate-400">Date:</strong> {issue.affectedRowData.date}</div>
                                     <div><strong className="text-slate-400">Description:</strong> {issue.affectedRowData.description}</div>
                                     <div><strong className="text-slate-400">Payer:</strong> {issue.affectedRowData.paid_by || "(empty)"}</div>
@@ -574,7 +574,7 @@ export default function ImportWizard() {
                                   <h4 className="font-bold text-slate-400 uppercase tracking-wider text-[10px]">
                                     Resolved Import Values (Based on Decision)
                                   </h4>
-                                  <div className="bg-white dark:bg-slate-950 border border-indigo-100 dark:border-indigo-900 p-4 rounded-xl space-y-1.5 font-mono text-[11px] text-indigo-900 dark:text-indigo-300">
+                                  <div className="bg-slate-950 border border-indigo-900 p-4 rounded-xl space-y-1.5 font-mono text-[11px] text-indigo-300">
                                     <div><strong className="text-indigo-300">Date:</strong> {decisions[idx.toString()]?.resolvedValue.date}</div>
                                     <div><strong className="text-indigo-300">Description:</strong> {decisions[idx.toString()]?.resolvedValue.description}</div>
                                     <div><strong className="text-indigo-300">Payer:</strong> {decisions[idx.toString()]?.resolvedValue.paid_by || "(empty)"}</div>
@@ -600,9 +600,9 @@ export default function ImportWizard() {
 
           {/* User Name mapping helper box */}
           <div className="glass-card p-6 rounded-2xl shadow-sm space-y-4">
-            <div className="flex items-center space-x-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+            <div className="flex items-center space-x-2 border-b border-slate-800 pb-3">
               <UserPlus className="h-4.5 w-4.5 text-blue-600" />
-              <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm">Payer & Member Name Mapping Rules</h3>
+              <h3 className="font-bold text-slate-100 text-sm">Payer & Member Name Mapping Rules</h3>
             </div>
             <p className="text-xs text-slate-400">
               Align names discovered in the CSV with actual group database members.
@@ -613,7 +613,7 @@ export default function ImportWizard() {
                 <select
                   value={nameMappings["Priya S"] || "Priya"}
                   onChange={(e) => handleNameMapChange("Priya S", e.target.value)}
-                  className="w-full text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-2 rounded-xl text-slate-700 dark:text-slate-200 outline-none"
+                  className="w-full text-xs bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none"
                 >
                   <option value="Priya">Map to Priya</option>
                   <option value="Aisha">Map to Aisha</option>
@@ -625,7 +625,7 @@ export default function ImportWizard() {
                 <select
                   value={nameMappings["priya"] || "Priya"}
                   onChange={(e) => handleNameMapChange("priya", e.target.value)}
-                  className="w-full text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-2 rounded-xl text-slate-700 dark:text-slate-200 outline-none"
+                  className="w-full text-xs bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none"
                 >
                   <option value="Priya">Map to Priya</option>
                   <option value="Aisha">Map to Aisha</option>
@@ -637,7 +637,7 @@ export default function ImportWizard() {
                 <select
                   value={nameMappings["rohan "] || "Rohan"}
                   onChange={(e) => handleNameMapChange("rohan ", e.target.value)}
-                  className="w-full text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-2 rounded-xl text-slate-700 dark:text-slate-200 outline-none"
+                  className="w-full text-xs bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none"
                 >
                   <option value="Rohan">Map to Rohan</option>
                   <option value="Aisha">Map to Aisha</option>
@@ -648,10 +648,10 @@ export default function ImportWizard() {
           </div>
 
           {/* Control Footer */}
-          <div className="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-6">
+          <div className="flex items-center justify-between border-t border-slate-800 pt-6">
             <button
               onClick={resetImport}
-              className="flex items-center space-x-1.5 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-bold transition-all"
+              className="flex items-center space-x-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition-all"
             >
               <RotateCcw className="h-4 w-4" />
               <span>Reset Wizard</span>
@@ -672,7 +672,7 @@ export default function ImportWizard() {
         <div className="glass-card p-12 rounded-3xl text-center space-y-6 max-w-md mx-auto shadow-sm">
           <Loader2 className="h-10 w-10 animate-spin text-blue-600 mx-auto" />
           <div className="space-y-1">
-            <h3 className="font-bold text-slate-800 dark:text-slate-100 text-base">Processing Import Transactions</h3>
+            <h3 className="font-bold text-slate-100 text-base">Processing Import Transactions</h3>
             <p className="text-slate-400 text-xs leading-relaxed">
               Applying resolving decisions, running currency exchange, calculating user splits, enforcing membership timelines, and saving to database...
             </p>
@@ -686,27 +686,27 @@ export default function ImportWizard() {
           {/* Main Stats Card */}
           <div className="glass-card p-8 rounded-3xl shadow-sm space-y-6">
             <div className="text-center space-y-2">
-              <div className="inline-flex bg-emerald-50 dark:bg-emerald-950 text-emerald-600 p-3 rounded-2xl border border-emerald-200 dark:border-emerald-800 mb-2">
+              <div className="inline-flex bg-emerald-950 text-emerald-600 p-3 rounded-2xl border border-emerald-800 mb-2">
                 <CheckCircle className="h-7 w-7" />
               </div>
-              <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">CSV Import Completed!</h2>
+              <h2 className="text-xl font-bold tracking-tight text-white">CSV Import Completed!</h2>
               <p className="text-slate-400 text-xs">A comprehensive report has been created and logged in the database.</p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-b border-slate-100 dark:border-slate-800 py-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-b border-slate-800 py-6">
               <div className="text-center">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Processed</span>
-                <span className="text-2xl font-black text-slate-800 mt-1">{importReport.rowsProcessed}</span>
+                <span className="text-2xl font-black text-slate-100 mt-1">{importReport.rowsProcessed}</span>
               </div>
-              <div className="text-center border-l border-slate-100">
+              <div className="text-center border-l border-slate-800">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block text-emerald-600">Imported</span>
                 <span className="text-2xl font-black text-emerald-600 mt-1">{importReport.imported}</span>
               </div>
-              <div className="text-center border-l border-slate-100">
+              <div className="text-center border-l border-slate-800">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block text-amber-500">Warnings</span>
                 <span className="text-2xl font-black text-amber-500 mt-1">{importReport.warnings}</span>
               </div>
-              <div className="text-center border-l border-slate-100">
+              <div className="text-center border-l border-slate-800">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block text-rose-500">Errors</span>
                 <span className="text-2xl font-black text-rose-500 mt-1">{importReport.errors}</span>
               </div>
@@ -715,8 +715,8 @@ export default function ImportWizard() {
             {/* Decisions applied */}
             {importReport.appliedDecisions?.length > 0 && (
               <div className="space-y-3">
-                <h4 className="font-bold text-slate-800 text-xs uppercase tracking-wider">Applied Fixes</h4>
-                <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-2xl max-h-48 overflow-y-auto space-y-2 text-[11px] font-mono text-slate-600">
+                <h4 className="font-bold text-slate-100 text-xs uppercase tracking-wider">Applied Fixes</h4>
+                <div className="bg-slate-900/50 border border-slate-700/60 p-4 rounded-2xl max-h-48 overflow-y-auto space-y-2 text-[11px] font-mono text-slate-300">
                   {importReport.appliedDecisions.map((dec: string, dIdx: number) => (
                     <div key={dIdx} className="flex items-start space-x-2">
                       <span className="text-emerald-500 font-bold">✓</span>
@@ -731,7 +731,7 @@ export default function ImportWizard() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4">
               <button
                 onClick={resetImport}
-                className="px-4 py-2 border border-slate-200 hover:bg-slate-100 text-slate-700 rounded-xl text-xs font-bold transition-all text-center"
+                className="px-4 py-2 border border-slate-700 hover:bg-slate-800 text-slate-200 rounded-xl text-xs font-bold transition-all text-center"
               >
                 Start Another Import
               </button>
@@ -753,11 +753,11 @@ export default function ImportWizard() {
       {/* Manual Row Editor Dialog */}
       {editingRowIndex !== null && editingRowValue && (
         <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-xl max-w-lg w-full space-y-4 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div className="bg-slate-900 border border-slate-700 p-6 rounded-2xl shadow-xl max-w-lg w-full space-y-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <div className="flex items-center space-x-2">
                 <Edit2 className="h-4 text-blue-600" />
-                <h3 className="font-bold text-slate-800 text-sm">Manual Row Editor (Row {editingRowIndex})</h3>
+                <h3 className="font-bold text-slate-100 text-sm">Manual Row Editor (Row {editingRowIndex})</h3>
               </div>
               <button
                 onClick={() => {
@@ -778,7 +778,7 @@ export default function ImportWizard() {
                   type="text"
                   value={editingRowValue.date}
                   onChange={(e) => setEditingRowValue(prev => prev ? { ...prev, date: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl font-medium"
+                  className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl font-medium text-slate-200"
                 />
               </div>
               <div>
@@ -787,7 +787,7 @@ export default function ImportWizard() {
                   type="text"
                   value={editingRowValue.paid_by}
                   onChange={(e) => setEditingRowValue(prev => prev ? { ...prev, paid_by: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl font-medium"
+                  className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl font-medium text-slate-200"
                 />
               </div>
               <div className="col-span-2">
@@ -796,7 +796,7 @@ export default function ImportWizard() {
                   type="text"
                   value={editingRowValue.description}
                   onChange={(e) => setEditingRowValue(prev => prev ? { ...prev, description: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl font-medium"
+                  className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl font-medium text-slate-200"
                 />
               </div>
               <div>
@@ -805,7 +805,7 @@ export default function ImportWizard() {
                   type="text"
                   value={editingRowValue.amount}
                   onChange={(e) => setEditingRowValue(prev => prev ? { ...prev, amount: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl font-medium"
+                  className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl font-medium text-slate-200"
                 />
               </div>
               <div>
@@ -814,7 +814,7 @@ export default function ImportWizard() {
                   type="text"
                   value={editingRowValue.currency}
                   onChange={(e) => setEditingRowValue(prev => prev ? { ...prev, currency: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl font-medium"
+                  className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl font-medium text-slate-200"
                 />
               </div>
               <div>
@@ -823,7 +823,7 @@ export default function ImportWizard() {
                   type="text"
                   value={editingRowValue.split_type}
                   onChange={(e) => setEditingRowValue(prev => prev ? { ...prev, split_type: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl font-medium"
+                  className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl font-medium text-slate-200"
                 />
               </div>
               <div>
@@ -832,7 +832,7 @@ export default function ImportWizard() {
                   type="text"
                   value={editingRowValue.split_with}
                   onChange={(e) => setEditingRowValue(prev => prev ? { ...prev, split_with: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl font-medium"
+                  className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl font-medium text-slate-200"
                 />
               </div>
               <div className="col-span-2">
@@ -841,7 +841,7 @@ export default function ImportWizard() {
                   type="text"
                   value={editingRowValue.split_details}
                   onChange={(e) => setEditingRowValue(prev => prev ? { ...prev, split_details: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl font-medium"
+                  className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl font-medium text-slate-200"
                 />
               </div>
               <div className="col-span-2">
@@ -850,19 +850,19 @@ export default function ImportWizard() {
                   type="text"
                   value={editingRowValue.notes}
                   onChange={(e) => setEditingRowValue(prev => prev ? { ...prev, notes: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl font-medium"
+                  className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl font-medium text-slate-200"
                 />
               </div>
             </div>
 
             {/* Dialog Footer */}
-            <div className="flex items-center justify-end space-x-2 border-t border-slate-100 pt-4">
+            <div className="flex items-center justify-end space-x-2 border-t border-slate-800 pt-4">
               <button
                 onClick={() => {
                   setEditingRowIndex(null);
                   setEditingRowValue(null);
                 }}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition-all"
               >
                 Cancel
               </button>

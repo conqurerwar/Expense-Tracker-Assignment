@@ -61,12 +61,12 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-20">
+    <header className="h-16 bg-slate-950 border-b border-slate-700 px-8 flex items-center justify-between sticky top-0 z-20">
       {/* Breadcrumb / Title */}
       <div className="flex items-center space-x-2">
         <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Pages</span>
         <span className="text-slate-300">/</span>
-        <h2 className="text-slate-800 font-bold text-base tracking-tight">{getPageTitle()}</h2>
+        <h2 className="text-slate-100 font-bold text-base tracking-tight">{getPageTitle()}</h2>
       </div>
 
       {/* Database State & Seeding helpers */}
@@ -80,9 +80,9 @@ export const Header: React.FC = () => {
 
         {dbState && dbState.users > 0 && (
           <div className="text-xs font-medium text-slate-500 hidden md:block">
-            Group: <strong className="text-slate-800 font-semibold">{dbState.users} Members</strong>
+            Group: <strong className="text-slate-100 font-semibold">{dbState.users} Members</strong>
             {dbState.expenses > 0 && (
-              <span>, <strong className="text-slate-800 font-semibold">{dbState.expenses} Expenses</strong></span>
+              <span>, <strong className="text-slate-100 font-semibold">{dbState.expenses} Expenses</strong></span>
             )}
           </div>
         )}
@@ -92,12 +92,12 @@ export const Header: React.FC = () => {
           disabled={seedingStatus === "loading"}
           className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all duration-200 ${
             seedingStatus === "loading"
-              ? "bg-slate-50 border-slate-200 text-slate-400 cursor-not-allowed"
+              ? "bg-slate-900/50 border-slate-700 text-slate-400 cursor-not-allowed"
               : seedingStatus === "success"
               ? "bg-emerald-50 border-emerald-200 text-emerald-600"
               : seedingStatus === "error"
               ? "bg-rose-50 border-rose-200 text-rose-600"
-              : "bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700 hover:text-slate-900 active:scale-95"
+              : "bg-slate-900/50 hover:bg-slate-800 border-slate-700 text-slate-200 hover:text-white active:scale-95"
           }`}
         >
           {seedingStatus === "loading" ? (

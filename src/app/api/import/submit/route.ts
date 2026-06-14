@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     } = body;
 
     // Get current user if authenticated, or default to a system/admin identifier
-    const authUser = getAuthUser(request);
+    const authUser = await getAuthUser(request);
     const actorEmail = authUser?.email || "system@example.com";
     
     // Find the actor user

@@ -38,7 +38,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const authUser = getAuthUser(request);
+    const authUser = await getAuthUser(request);
     const actorEmail = authUser?.email || "system@example.com";
     let systemUser = await prisma.user.findFirst({ where: { email: actorEmail } });
     if (!systemUser) {

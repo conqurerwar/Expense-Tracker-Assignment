@@ -258,7 +258,7 @@ export default function Dashboard() {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center space-x-2">
+          <h1 className="text-2xl font-bold tracking-tight text-white flex items-center space-x-2">
             <span>Expenses Overview</span>
             <Sparkles className="h-5 w-5 text-indigo-500" />
           </h1>
@@ -366,7 +366,7 @@ export default function Dashboard() {
                 <BarChart data={spendingByMemberData} margin={{ left: 10 }}>
                   <XAxis dataKey="name" stroke="#94A3B8" fontSize={12} tickLine={false} />
                   <YAxis stroke="#94A3B8" fontSize={12} tickLine={false} />
-                  <Tooltip formatter={(value) => [`₹${value.toLocaleString()}`, "Paid"]} />
+                  <Tooltip formatter={(value) => [`₹${value.toLocaleString()}`, "Paid"]} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
                   <Bar dataKey="value" fill="#3B82F6" radius={[8, 8, 0, 0]}>
                     {spendingByMemberData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -404,7 +404,7 @@ export default function Dashboard() {
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
-                      <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} />
+                      <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
@@ -438,10 +438,10 @@ export default function Dashboard() {
             {monthlySpendingData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={monthlySpendingData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
                   <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} tickLine={false} />
                   <YAxis stroke="#94A3B8" fontSize={12} tickLine={false} />
-                  <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} />
+                  <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
                   <Line
                     type="monotone"
                     dataKey="amount"
@@ -482,13 +482,13 @@ export default function Dashboard() {
                         <Cell fill="#10B981" />
                         <Cell fill="#F59E0B" />
                       </Pie>
-                      <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} />
+                      <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '0.5rem', color: '#e2e8f0' }} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
                 <div className="w-full md:w-56 mt-4 md:mt-0 space-y-2.5">
-                  <div className="text-xs bg-slate-50 border border-slate-100 p-3 rounded-xl space-y-1">
-                    <p className="font-semibold text-slate-700">Audit Conversion Rule</p>
+                  <div className="text-xs bg-slate-900/50 border border-slate-700 p-3 rounded-xl space-y-1">
+                    <p className="font-semibold text-slate-200">Audit Conversion Rule</p>
                     <p className="text-[10px] text-slate-400 leading-relaxed">
                       All USD expenses are automatically converted to INR on the date of transaction using audited rates.
                     </p>
@@ -515,7 +515,7 @@ export default function Dashboard() {
             activityFeed.map((activity) => (
               <div
                 key={activity.id + "-" + activity.type}
-                className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors duration-150"
+                className="px-6 py-4 flex items-center justify-between hover:bg-slate-800 transition-colors duration-150"
               >
                 <div className="flex items-center space-x-4 min-w-0">
                   <div className={`p-2 rounded-xl shrink-0 ${activity.color}`}>

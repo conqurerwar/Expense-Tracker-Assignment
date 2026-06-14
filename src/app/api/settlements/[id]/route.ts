@@ -18,7 +18,7 @@ export async function PUT(
       notes = ""
     } = body;
 
-    const authUser = getAuthUser(request);
+    const authUser = await getAuthUser(request);
     const actorEmail = authUser?.email || "system@example.com";
     let systemUser = await prisma.user.findFirst({ where: { email: actorEmail } });
     if (!systemUser) {
@@ -104,7 +104,7 @@ export async function DELETE(
   try {
     const { id } = await params;
 
-    const authUser = getAuthUser(request);
+    const authUser = await getAuthUser(request);
     const actorEmail = authUser?.email || "system@example.com";
     let systemUser = await prisma.user.findFirst({ where: { email: actorEmail } });
     if (!systemUser) {

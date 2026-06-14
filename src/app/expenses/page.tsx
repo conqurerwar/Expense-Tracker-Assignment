@@ -334,7 +334,7 @@ export default function ExpenseTimeline() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center space-x-2">
+          <h1 className="text-2xl font-bold tracking-tight text-white flex items-center space-x-2">
             <span>Expenses Timeline</span>
             <Receipt className="h-5.5 w-5.5 text-blue-500" />
           </h1>
@@ -350,10 +350,10 @@ export default function ExpenseTimeline() {
       </div>
 
       {/* Filter Options */}
-      <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4">
+      <div className="bg-slate-900/50 border border-slate-700 p-6 rounded-2xl shadow-sm space-y-4">
         <div className="flex items-center space-x-2 border-b border-slate-100 pb-3">
           <Filter className="h-4 w-4 text-blue-600" />
-          <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider">Timeline Filters</h3>
+          <h3 className="font-bold text-slate-100 text-xs uppercase tracking-wider">Timeline Filters</h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-xs">
           {/* Member */}
@@ -362,7 +362,7 @@ export default function ExpenseTimeline() {
             <select
               value={filterUser}
               onChange={(e) => setFilterUser(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl text-slate-700 outline-none"
+              className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none"
             >
               <option value="">All Members</option>
               {members.map(m => (
@@ -377,7 +377,7 @@ export default function ExpenseTimeline() {
             <select
               value={filterCurrency}
               onChange={(e) => setFilterCurrency(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl text-slate-700 outline-none"
+              className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none"
             >
               <option value="">All Currencies</option>
               <option value="INR">INR</option>
@@ -391,7 +391,7 @@ export default function ExpenseTimeline() {
             <select
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl text-slate-700 outline-none"
+              className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none"
             >
               <option value="">All Categories</option>
               <option value="Rent">Rent</option>
@@ -407,7 +407,7 @@ export default function ExpenseTimeline() {
             <select
               value={filterSource}
               onChange={(e) => setFilterSource(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl text-slate-700 outline-none"
+              className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none"
             >
               <option value="">All Sources</option>
               <option value="manual">Manual Expense</option>
@@ -423,7 +423,7 @@ export default function ExpenseTimeline() {
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl text-slate-700 outline-none"
+              className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none"
             />
           </div>
 
@@ -433,7 +433,7 @@ export default function ExpenseTimeline() {
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 p-2 rounded-xl text-slate-700 outline-none"
+              className="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl text-slate-200 outline-none"
             />
           </div>
         </div>
@@ -443,9 +443,9 @@ export default function ExpenseTimeline() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Expenses List */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-            <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
-              <h3 className="font-bold text-slate-800 text-xs uppercase tracking-wider">Expense Logs</h3>
+          <div className="bg-slate-900/50 border border-slate-700 rounded-2xl shadow-sm overflow-hidden">
+            <div className="px-6 py-4 bg-slate-900/50 border-b border-slate-700 flex justify-between items-center">
+              <h3 className="font-bold text-slate-100 text-xs uppercase tracking-wider">Expense Logs</h3>
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                 {expenses.length} Records
               </span>
@@ -461,8 +461,8 @@ export default function ExpenseTimeline() {
                   <div
                     key={e.id}
                     onClick={() => setDrawerExpense(e)}
-                    className={`px-6 py-4 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-colors duration-150 ${
-                      drawerExpense?.id === e.id ? "bg-slate-50 border-l-4 border-blue-500 pl-5" : ""
+                    className={`px-6 py-4 flex items-center justify-between hover:bg-slate-800 cursor-pointer transition-colors duration-150 ${
+                      drawerExpense?.id === e.id ? "bg-slate-800 border-l-4 border-blue-500 pl-5" : ""
                     }`}
                   >
                     <div className="flex items-center space-x-4 min-w-0">
@@ -470,9 +470,9 @@ export default function ExpenseTimeline() {
                         <Receipt className="h-4.5 w-4.5" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-sm text-slate-800 font-bold truncate">{e.description}</p>
+                        <p className="text-sm text-slate-100 font-bold truncate">{e.description}</p>
                         <div className="flex items-center space-x-2 text-[10px] text-slate-400 mt-1 font-medium">
-                          <span className="font-semibold text-slate-600">Paid by {e.paidBy?.name}</span>
+                          <span className="font-semibold text-slate-300">Paid by {e.paidBy?.name}</span>
                           <span>•</span>
                           <span>{new Date(e.date).toLocaleDateString()}</span>
                           {e.importId && (
@@ -488,7 +488,7 @@ export default function ExpenseTimeline() {
                     </div>
 
                     <div className="text-right shrink-0">
-                      <span className="text-sm font-extrabold text-slate-800 block">
+                      <span className="text-sm font-extrabold text-slate-100 block">
                         ₹{Math.round(e.amount).toLocaleString()}
                       </span>
                       {e.originalCurrency !== "INR" && (
@@ -509,9 +509,9 @@ export default function ExpenseTimeline() {
         </div>
 
         {/* Details Drawer */}
-        <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden p-6 space-y-6">
+        <div className="bg-slate-900/50 border border-slate-700 rounded-2xl shadow-sm overflow-hidden p-6 space-y-6">
           <div className="border-b border-slate-100 pb-4 flex justify-between items-center">
-            <h3 className="font-bold text-slate-800 text-sm flex items-center space-x-2">
+            <h3 className="font-bold text-slate-100 text-sm flex items-center space-x-2">
               <Info className="h-4.5 w-4.5 text-blue-500" />
               <span>Expense Audit details</span>
             </h3>
@@ -519,14 +519,14 @@ export default function ExpenseTimeline() {
               <div className="flex space-x-2">
                 <button
                   onClick={() => openEditModal(drawerExpense)}
-                  className="p-1.5 hover:bg-slate-100 rounded-lg text-slate-500 hover:text-slate-700 transition-colors"
+                  className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-500 hover:text-slate-200 transition-colors"
                   title="Edit Expense"
                 >
                   <Edit2 className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => handleDeleteExpense(drawerExpense.id)}
-                  className="p-1.5 hover:bg-slate-100 rounded-lg text-rose-500 hover:text-rose-600 transition-colors"
+                  className="p-1.5 hover:bg-slate-800 rounded-lg text-rose-500 hover:text-rose-600 transition-colors"
                   title="Delete Expense"
                 >
                   <Trash2 className="h-4 w-4" />
@@ -539,7 +539,7 @@ export default function ExpenseTimeline() {
             <div className="space-y-6 text-xs">
               {/* Description & Date */}
               <div>
-                <h4 className="text-base font-extrabold text-slate-800">{drawerExpense.description}</h4>
+                <h4 className="text-base font-extrabold text-slate-100">{drawerExpense.description}</h4>
                 <div className="flex items-center space-x-2 text-[10px] text-slate-400 mt-1.5 font-medium">
                   <Calendar className="h-3.5 w-3.5" />
                   <span>Logged date: {new Date(drawerExpense.date).toLocaleDateString()}</span>
@@ -547,10 +547,10 @@ export default function ExpenseTimeline() {
               </div>
 
               {/* Converted details */}
-              <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-xl space-y-3">
+              <div className="bg-slate-900/50 border border-slate-700/60 p-4 rounded-xl space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-slate-400 font-semibold">Total Amount (INR)</span>
-                  <span className="font-extrabold text-slate-800 text-base">
+                  <span className="font-extrabold text-slate-100 text-base">
                     ₹{drawerExpense.amount.toLocaleString()}
                   </span>
                 </div>
@@ -558,13 +558,13 @@ export default function ExpenseTimeline() {
                   <div className="border-t border-slate-200/50 pt-2.5 space-y-1.5 text-[11px] text-slate-500">
                     <div className="flex justify-between">
                       <span>Original Cost</span>
-                      <span className="font-semibold text-slate-700">
+                      <span className="font-semibold text-slate-200">
                         {drawerExpense.originalAmount} {drawerExpense.originalCurrency}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Exchange Rate</span>
-                      <span className="font-semibold text-slate-700">
+                      <span className="font-semibold text-slate-200">
                         1 USD = {drawerExpense.exchangeRate} INR
                       </span>
                     </div>
@@ -577,11 +577,11 @@ export default function ExpenseTimeline() {
                 <h5 className="font-bold text-[10px] text-slate-400 uppercase tracking-wider">Split Strategy</h5>
                 <div className="flex justify-between font-medium">
                   <span>Paid By</span>
-                  <span className="font-bold text-slate-800">{drawerExpense.paidBy?.name}</span>
+                  <span className="font-bold text-slate-100">{drawerExpense.paidBy?.name}</span>
                 </div>
                 <div className="flex justify-between font-medium">
                   <span>Split Formula</span>
-                  <span className="font-bold text-slate-800 capitalize">{drawerExpense.splitType}</span>
+                  <span className="font-bold text-slate-100 capitalize">{drawerExpense.splitType}</span>
                 </div>
               </div>
 
@@ -592,13 +592,13 @@ export default function ExpenseTimeline() {
                   {drawerExpense.splits.map((s) => (
                     <div key={s.userId} className="flex justify-between items-center text-xs">
                       <div className="flex items-center space-x-2">
-                        <div className="h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500 text-[10px]">
+                        <div className="h-6 w-6 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-500 text-[10px]">
                           {s.user?.name.charAt(0)}
                         </div>
-                        <span className="font-semibold text-slate-700">{s.user?.name}</span>
+                        <span className="font-semibold text-slate-200">{s.user?.name}</span>
                       </div>
                       <div className="text-right">
-                        <span className="font-extrabold text-slate-800">
+                        <span className="font-extrabold text-slate-100">
                           ₹{Math.round(s.amount).toLocaleString()}
                         </span>
                         {s.percentage && (
@@ -617,7 +617,7 @@ export default function ExpenseTimeline() {
               {drawerExpense.notes && (
                 <div className="space-y-1.5 border-t border-slate-100 pt-4">
                   <h5 className="font-bold text-[10px] text-slate-400 uppercase tracking-wider">Notes & Comments</h5>
-                  <p className="text-slate-500 italic leading-relaxed bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                  <p className="text-slate-500 italic leading-relaxed bg-slate-900/50 p-2.5 rounded-lg border border-slate-700">
                     "{drawerExpense.notes}"
                   </p>
                 </div>
@@ -636,12 +636,12 @@ export default function ExpenseTimeline() {
         <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <form
             onSubmit={handleSaveExpense}
-            className="bg-white border border-slate-200 p-6 rounded-2xl shadow-xl max-w-lg w-full space-y-4 max-h-[95vh] overflow-y-auto"
+            className="bg-slate-900 border border-slate-700 p-6 rounded-2xl shadow-xl max-w-lg w-full space-y-4 max-h-[95vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center space-x-2">
                 <Receipt className="h-4.5 w-4.5 text-blue-600" />
-                <h3 className="font-bold text-slate-800 text-sm">
+                <h3 className="font-bold text-slate-100 text-sm">
                   {editingExpenseId ? "Modify Expense" : "Add Manual Expense"}
                 </h3>
               </div>
@@ -660,7 +660,7 @@ export default function ExpenseTimeline() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="e.g. Feb Rent"
-                  className="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl font-medium outline-none focus:border-blue-500"
+                  className="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl font-medium outline-none focus:border-blue-500 text-slate-200"
                 />
               </div>
 
@@ -669,7 +669,7 @@ export default function ExpenseTimeline() {
                 <select
                   value={paidById}
                   onChange={(e) => setPaidById(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl font-semibold outline-none focus:border-blue-500 text-slate-700"
+                  className="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl font-semibold outline-none focus:border-blue-500 text-slate-200"
                 >
                   {members.map(m => (
                     <option key={m.id} value={m.id}>{m.name}</option>
@@ -684,7 +684,7 @@ export default function ExpenseTimeline() {
                   required
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl font-medium outline-none focus:border-blue-500"
+                  className="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl font-medium outline-none focus:border-blue-500 text-slate-200"
                 />
               </div>
 
@@ -697,7 +697,7 @@ export default function ExpenseTimeline() {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="e.g. 48000"
-                  className="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl font-medium outline-none focus:border-blue-500"
+                  className="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl font-medium outline-none focus:border-blue-500 text-slate-200"
                 />
               </div>
 
@@ -706,7 +706,7 @@ export default function ExpenseTimeline() {
                 <select
                   value={currency}
                   onChange={(e) => setCurrency(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl font-semibold outline-none focus:border-blue-500 text-slate-700"
+                  className="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl font-semibold outline-none focus:border-blue-500 text-slate-200"
                 >
                   <option value="INR">INR (₹)</option>
                   <option value="USD">USD ($)</option>
@@ -718,7 +718,7 @@ export default function ExpenseTimeline() {
                 <select
                   value={splitType}
                   onChange={(e) => setSplitType(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl font-semibold outline-none focus:border-blue-500 text-slate-700"
+                  className="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl font-semibold outline-none focus:border-blue-500 text-slate-200"
                 >
                   <option value="equal">Split Equally</option>
                   <option value="percentage">Percentages (%)</option>
@@ -733,7 +733,7 @@ export default function ExpenseTimeline() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Notes or trip details..."
-                  className="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl font-medium outline-none focus:border-blue-500 h-16 resize-none"
+                  className="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl font-medium outline-none focus:border-blue-500 h-16 resize-none text-slate-200"
                 />
               </div>
             </div>
@@ -751,8 +751,8 @@ export default function ExpenseTimeline() {
                       key={m.id}
                       className={`p-3 rounded-xl border flex items-center justify-between text-xs transition-all ${
                         involved
-                          ? "bg-blue-50 border-blue-200 text-blue-900"
-                          : "bg-slate-50 border-slate-200 text-slate-400"
+                          ? "bg-blue-950 border-blue-700 text-blue-200"
+                          : "bg-slate-900 border-slate-700 text-slate-400"
                       }`}
                     >
                       <label className="flex items-center space-x-2.5 cursor-pointer font-semibold w-full">
@@ -775,7 +775,7 @@ export default function ExpenseTimeline() {
                               placeholder="%"
                               value={customSplits[m.id]?.percentage || ""}
                               onChange={(e) => handleSplitValueChange(m.id, "percentage", e.target.value)}
-                              className="w-full bg-white border border-blue-300 p-1.5 rounded-lg text-center font-bold text-slate-800"
+                              className="w-full bg-slate-900 border border-blue-500 p-1.5 rounded-lg text-center font-bold text-slate-100"
                             />
                           )}
                           {splitType === "share" && (
@@ -785,7 +785,7 @@ export default function ExpenseTimeline() {
                               placeholder="share"
                               value={customSplits[m.id]?.ratio || "1"}
                               onChange={(e) => handleSplitValueChange(m.id, "ratio", e.target.value)}
-                              className="w-full bg-white border border-blue-300 p-1.5 rounded-lg text-center font-bold text-slate-800"
+                              className="w-full bg-slate-900 border border-blue-500 p-1.5 rounded-lg text-center font-bold text-slate-100"
                             />
                           )}
                           {splitType === "unequal" && (
@@ -795,7 +795,7 @@ export default function ExpenseTimeline() {
                               placeholder="value"
                               value={customSplits[m.id]?.amount || ""}
                               onChange={(e) => handleSplitValueChange(m.id, "amount", e.target.value)}
-                              className="w-full bg-white border border-blue-300 p-1.5 rounded-lg text-center font-bold text-slate-800"
+                              className="w-full bg-slate-900 border border-blue-500 p-1.5 rounded-lg text-center font-bold text-slate-100"
                             />
                           )}
                         </div>
@@ -811,7 +811,7 @@ export default function ExpenseTimeline() {
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition-all"
               >
                 Cancel
               </button>

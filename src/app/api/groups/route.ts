@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Group name is required" }, { status: 400 });
     }
 
-    const authUser = getAuthUser(request);
+    const authUser = await getAuthUser(request);
     const actorEmail = authUser?.email || "system@example.com";
     let systemUser = await prisma.user.findFirst({ where: { email: actorEmail } });
     if (!systemUser) {
