@@ -532,7 +532,7 @@ export async function parseCsvFile(csvContent: string): Promise<RawRow[]> {
       complete: (results) => {
         resolve(results.data as RawRow[]);
       },
-      error: (err) => {
+      error: (err: any) => {
         reject(err);
       }
     });
