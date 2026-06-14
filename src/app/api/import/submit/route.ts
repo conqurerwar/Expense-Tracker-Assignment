@@ -81,7 +81,7 @@ export async function POST(request: Request) {
         // Check if user exists
         let user = existingUsers.find(u => normalizeCapitalization(u.name) === normalized);
         if (!user) {
-          user = await tx.user.create({
+          user = await prisma.user.create({
             data: {
               email: `${normalized.toLowerCase()}@example.com`,
               name: normalized
@@ -90,7 +90,7 @@ export async function POST(request: Request) {
         }
 
         // Upsert group membership
-        await tx.groupMember.upsert({
+        await prisma.groupMember.upsert({
           where: {
             groupId_userId: {
               groupId: resolvedGroupId,
@@ -110,7 +110,7 @@ export async function POST(request: Request) {
         });
 
         // Audit Log membership timeline change
-        await tx.auditLog.create({
+        await prisma.auditLog.create({
           data: {
             userId: systemUser.id,
             action: "UPDATE_MEMBERSHIP_TIMELINE",
@@ -122,7 +122,7 @@ export async function POST(request: Request) {
       }
 
       // Refresh cache of members in the transaction
-      const allGroupMembers = await tx.groupMember.findMany({
+      const allGroupMembers = await prisma.groupMember.findMany({
         where: { groupId: resolvedGroupId },
         include: { user: true }
       });
@@ -135,7 +135,7 @@ export async function POST(request: Request) {
       });
 
       // B. Create Import Run Header
-      const importRun = await tx.import.create({
+      const importRun = await prisma.import.create({
         data: {
           fileName,
           status: "PENDING",
@@ -161,7 +161,7 @@ export async function POST(request: Request) {
         if (rowDecision && rowDecision.decision === "SKIP_ROW") {
           skippedCount++;
           // Record skip in issues
-          await tx.importIssue.create({
+          await prisma.importIssue.create({
             data: {
               importId: importRun.id,
               rowIndex,
@@ -191,7 +191,7 @@ export async function POST(request: Request) {
         if (!dateResult.parsedDate) {
           errorsCount++;
           // Save issue and skip due to critical error
-          await tx.importIssue.create({
+          await prisma.importIssue.create({
             data: {
               importId: importRun.id,
               rowIndex,
@@ -228,7 +228,7 @@ export async function POST(request: Request) {
 
         if (!payerInfo) {
           errorsCount++;
-          await tx.importIssue.create({
+          await prisma.importIssue.create({
             data: {
               importId: importRun.id,
               rowIndex,
@@ -255,7 +255,7 @@ export async function POST(request: Request) {
         let convertedAmount = rawAmount;
         if (currency === "USD") {
           // Retrieve exchange rate active on the expense date
-          const rateRecord = await tx.exchangeRate.findFirst({
+          const rateRecord = await prisma.exchangeRate.findFirst({
             where: {
               fromCurrency: "USD",
               toCurrency: "INR",
@@ -289,7 +289,7 @@ export async function POST(request: Request) {
 
           if (!payeeInfo) {
             errorsCount++;
-            await tx.importIssue.create({
+            await prisma.importIssue.create({
               data: {
                 importId: importRun.id,
                 rowIndex,
@@ -307,7 +307,7 @@ export async function POST(request: Request) {
           }
 
           // Create Settlement
-          const settlement = await tx.settlement.create({
+          const settlement = await prisma.settlement.create({
             data: {
               groupId: resolvedGroupId,
               payerId: payerInfo.id,
@@ -323,7 +323,7 @@ export async function POST(request: Request) {
           });
 
           // Log Audit
-          await tx.auditLog.create({
+          await prisma.auditLog.create({
             data: {
               userId: systemUser.id,
               action: "IMPORT_SETTLEMENT",
@@ -335,7 +335,7 @@ export async function POST(request: Request) {
 
           // Record resolved issue if one existed for this row
           if (rowDecision) {
-            await tx.importIssue.create({
+            await prisma.importIssue.create({
               data: {
                 importId: importRun.id,
                 rowIndex,
@@ -378,7 +378,7 @@ export async function POST(request: Request) {
 
         if (participantInfos.length === 0) {
           errorsCount++;
-          await tx.importIssue.create({
+          await prisma.importIssue.create({
             data: {
               importId: importRun.id,
               rowIndex,
@@ -414,7 +414,7 @@ export async function POST(request: Request) {
           const inactiveParticipants = participantInfos.filter(p => !activeMemberIdsAtDate.includes(p.id));
           if (inactiveParticipants.length > 0) {
             warningsCount++;
-            await tx.importIssue.create({
+            await prisma.importIssue.create({
               data: {
                 importId: importRun.id,
                 rowIndex,
@@ -433,7 +433,7 @@ export async function POST(request: Request) {
 
         if (eligibleParticipants.length === 0) {
           errorsCount++;
-          await tx.importIssue.create({
+          await prisma.importIssue.create({
             data: {
               importId: importRun.id,
               rowIndex,
@@ -495,7 +495,7 @@ export async function POST(request: Request) {
           if (Math.abs(totalParsedOriginal - rawAmount) > 0.01) {
             warningsCount++;
             // Create Warning and adjust slightly
-            await tx.importIssue.create({
+            await prisma.importIssue.create({
               data: {
                 importId: importRun.id,
                 rowIndex,
@@ -545,7 +545,7 @@ export async function POST(request: Request) {
 
           if (totalPct !== 100) {
             warningsCount++;
-            await tx.importIssue.create({
+            await prisma.importIssue.create({
               data: {
                 importId: importRun.id,
                 rowIndex,
@@ -582,7 +582,7 @@ export async function POST(request: Request) {
         }
 
         // Create Expense record
-        const expense = await tx.expense.create({
+        const expense = await prisma.expense.create({
           data: {
             groupId: resolvedGroupId,
             description: rowToImport.description,
@@ -600,7 +600,7 @@ export async function POST(request: Request) {
 
         // Create Expense Participants
         for (const part of eligibleParticipants) {
-          await tx.expenseParticipant.create({
+          await prisma.expenseParticipant.create({
             data: {
               expenseId: expense.id,
               userId: part.id
@@ -610,7 +610,7 @@ export async function POST(request: Request) {
 
         // Create Expense Splits
         for (const split of calculatedSplits) {
-          await tx.expenseSplit.create({
+          await prisma.expenseSplit.create({
             data: {
               expenseId: expense.id,
               userId: split.userId,
@@ -623,7 +623,7 @@ export async function POST(request: Request) {
         }
 
         // Audit Log expense import
-        await tx.auditLog.create({
+        await prisma.auditLog.create({
           data: {
             userId: systemUser.id,
             action: "IMPORT_EXPENSE",
@@ -635,7 +635,7 @@ export async function POST(request: Request) {
 
         // Record resolution of row issues if decision was made
         if (rowDecision) {
-          await tx.importIssue.create({
+          await prisma.importIssue.create({
             data: {
               importId: importRun.id,
               rowIndex,
@@ -656,7 +656,7 @@ export async function POST(request: Request) {
       }
 
       // D. Update Import Run Header status
-      const finalImport = await tx.import.update({
+      const finalImport = await prisma.import.update({
         where: { id: importRun.id },
         data: {
           status: "COMPLETED",
@@ -675,7 +675,7 @@ export async function POST(request: Request) {
         errors: errorsCount,
         appliedDecisions
       };
-    });
+    })();
 
     return NextResponse.json({
       success: true,
