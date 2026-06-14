@@ -40,14 +40,27 @@ export async function POST(request: Request) {
       });
     }
 
-    // 1. Process and update/create membership timelines based on user inputs
-    const dbGroup = await prisma.group.findUnique({
-      where: { id: groupId }
-    });
+    // 1. Find or auto-create the group
+    let dbGroup = await prisma.group.findUnique({ where: { id: groupId } });
 
     if (!dbGroup) {
-      return NextResponse.json({ error: "Target group not found" }, { status: 404 });
+      // Try to use the first available group
+      dbGroup = await prisma.group.findFirst();
     }
+
+    if (!dbGroup) {
+      // Auto-create a default group so the import can proceed
+      dbGroup = await prisma.group.create({
+        data: {
+          name: "Flatmates",
+          description: "Auto-created group for CSV import",
+          createdById: systemUser!.id,
+        }
+      });
+    }
+
+    const resolvedGroupId = dbGroup.id;
+
 
     // Prepare Name Mapping & User Creation
     const finalUserCache: Record<string, { id: string; name: string }> = {};
@@ -55,7 +68,7 @@ export async function POST(request: Request) {
     // Get all current users in system
     const existingUsers = await prisma.user.findMany();
     const existingGroupMembers = await prisma.groupMember.findMany({
-      where: { groupId },
+      where: { groupId: resolvedGroupId },
       include: { user: true }
     });
 
@@ -81,7 +94,7 @@ export async function POST(request: Request) {
         await tx.groupMember.upsert({
           where: {
             groupId_userId: {
-              groupId,
+              groupId: resolvedGroupId,
               userId: user.id
             }
           },
@@ -90,7 +103,7 @@ export async function POST(request: Request) {
             leftAt: period.leftAt ? new Date(period.leftAt) : null
           },
           create: {
-            groupId,
+            groupId: resolvedGroupId,
             userId: user.id,
             joinedAt: new Date(period.joinedAt),
             leftAt: period.leftAt ? new Date(period.leftAt) : null
@@ -111,7 +124,7 @@ export async function POST(request: Request) {
 
       // Refresh cache of members in the transaction
       const allGroupMembers = await tx.groupMember.findMany({
-        where: { groupId },
+        where: { groupId: resolvedGroupId },
         include: { user: true }
       });
 
@@ -297,7 +310,7 @@ export async function POST(request: Request) {
           // Create Settlement
           const settlement = await tx.settlement.create({
             data: {
-              groupId,
+              groupId: resolvedGroupId,
               payerId: payerInfo.id,
               payeeId: payeeInfo.id,
               amount: Math.round(convertedAmount * 100) / 100,
@@ -572,7 +585,7 @@ export async function POST(request: Request) {
         // Create Expense record
         const expense = await tx.expense.create({
           data: {
-            groupId,
+            groupId: resolvedGroupId,
             description: rowToImport.description,
             paidById: payerInfo.id,
             amount: Math.round(convertedAmount * 100) / 100,
