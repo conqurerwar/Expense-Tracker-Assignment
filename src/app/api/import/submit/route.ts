@@ -54,7 +54,6 @@ export async function POST(request: Request) {
         data: {
           name: "Flatmates",
           description: "Auto-created group for CSV import",
-          createdById: systemUser!.id,
         }
       });
     }
