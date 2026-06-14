@@ -350,7 +350,7 @@ export async function POST(request: Request) {
         const rawParticipantsNames = rawSplitWith.split(";").map((p: string) => cleanName(p)).filter((p: string) => p !== "");
 
         const participantInfos: Array<{ id: string; name: string }> = [];
-        rawParticipantsNames.forEach(rawName => {
+        rawParticipantsNames.forEach((rawName: string) => {
           const mappedName = nameMappings[rawName] || normalizeCapitalization(rawName);
           let pInfo = finalUserCache[normalizeCapitalization(mappedName)];
           if (!pInfo) {
